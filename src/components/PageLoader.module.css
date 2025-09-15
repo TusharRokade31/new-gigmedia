@@ -1,0 +1,93 @@
+/* components/PageLoader.module.css */
+.loaderContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.curtain {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background: black;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.curtainLeft {
+  left: 0;
+}
+
+.curtainRight {
+  right: 0;
+}
+
+.curtainLeftOpen {
+  transform: translateX(-100%);
+}
+
+.curtainRightOpen {
+  transform: translateX(100%);
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.logo img {
+  /* max-width: 200px;
+  max-height: 200px; */
+  display: block;
+}
+
+.logoMoveToTop {
+  top: 10px;
+  left: 60px;
+  transform: translate(0, 0) scale(0.5);
+}
+
+
+
+.logoMoveToTop::after {
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add to PageLoader.module.css */
+.persistentLogo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  transform: scale(0.6);
+  opacity: 1;
+  animation: fadeInScale 0.3s ease-out;
+}
+
+.persistentLogo img {
+  display: block;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(0.6);
+  }
+}

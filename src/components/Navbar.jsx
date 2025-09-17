@@ -5,6 +5,10 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import GigLogo from "../assets/images/main-logo.svg"
+ import { ChevronDown, ShoppingCart, Search, Menu, X } from 'lucide-react';
+import MagneticLanguageButton from './ui/MagneticLanguageButton'
+import MagneticButton from './ui/MagneticButton'
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -26,26 +30,24 @@ const Header = () => {
           <div className="flex items-center justify-between h-14 sm:h-16 md:h-20 lg:h-28">
             
             {/* Logo - Always visible */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 flex items-center justify-center" >
               <Link href="/" className="flex items-center">
                 <Image 
                   src={GigLogo} 
                   alt='gigmediaapp' 
                   width={80} 
                   height={50} 
-                  className='w-16 h-auto sm:w-20 md:w-24 lg:w-28 transition-all duration-300 hover:scale-105'
+                  className='w-16  sm:w-20 md:w-24 lg:w-24 transition-all duration-300 hover:scale-105'
                   priority
                 />
               </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+               {/* Desktop Navigation */}
+            <div className="hidden lg:flex ms-10 items-center space-x-6 xl:space-x-8">
               {menuItems.map((item) => (
                 <div key={item.name} className="nav-item relative">
                   <Link 
                     href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-300 text-sm xl:text-base font-medium tracking-wide relative group"
+                    className="text-[#ffffff48] hover:text-white transition-colors duration-300 text-sm xl:text-base font-medium tracking-wide relative group"
                   >
                     {item.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-px bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
@@ -53,65 +55,66 @@ const Header = () => {
                 </div>
               ))}
             </div>
+            </div>
+
+           
 
             {/* Desktop Language switcher and cart */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <div className="relative">
-                <button className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
-                  EN
-                  <svg className="w-3 h-3 ml-1 inline-block" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </div>
-              
-              <div className="relative">
-                <button className="text-gray-300 hover:text-white transition-colors duration-300">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 9M7 13h10M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6" />
-                  </svg>
-                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                </button>
-              </div>
-            </div>
+           
+
+ <div className="hidden lg:flex items-center space-x-4">
+      {/* Search Icon */}
+      <MagneticButton size="lg" ariaLabel="Search">
+        <Search className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors duration-300" />
+      </MagneticButton>
+
+      {/* Language Switcher */}
+      <MagneticLanguageButton className="" language="EN" />
+      
+      {/* Cart */}
+      <div className="relative">
+        <MagneticButton size="lg" ariaLabel="Shopping Cart">
+          <ShoppingCart className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors duration-300" />
+        </MagneticButton>
+       
+      </div>
+    </div>
 
             {/* Tablet/Mobile Right Side - Language & Cart & Menu */}
-            <div className="flex items-center space-x-3 lg:hidden">
-              {/* Language Switcher - Hidden on mobile, visible on tablet */}
-              <div className="hidden sm:block">
-                <button className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
-                  EN
-                  <svg className="w-3 h-3 ml-1 inline-block" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </div>
+         
 
-              {/* Cart */}
-              <div className="relative">
-                <button className="text-gray-300 hover:text-white transition-colors duration-300">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 9M7 13h10M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6" />
-                  </svg>
-                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-xs">0</span>
-                </button>
-              </div>
+ <div className="flex items-center space-x-3 lg:hidden">
+      {/* Search Icon */}
+      <MagneticButton size="md" ariaLabel="Search">
+        <Search className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors duration-300" />
+      </MagneticButton>
 
-              {/* Mobile menu button */}
-              <button 
-                className="text-white p-1"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  {isMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
-              </button>
-            </div>
+      {/* Language Switcher - Hidden on mobile, visible on tablet */}
+      <div className="hidden sm:block">
+        <MagneticLanguageButton language="EN" />
+      </div>
+
+      {/* Cart */}
+      <div className="relative">
+        <MagneticButton size="md" ariaLabel="Shopping Cart">
+          <ShoppingCart className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors duration-300" />
+        </MagneticButton>
+        
+      </div>
+
+      {/* Mobile menu button */}
+      <MagneticButton 
+        size="md"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        ariaLabel="Toggle menu"
+      >
+        {isMenuOpen ? (
+          <X className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors duration-300" />
+        ) : (
+          <Menu className="w-5 h-5 text-gray-600 group-hover:text-gray-800 transition-colors duration-300" />
+        )}
+      </MagneticButton>
+    </div>
           </div>
 
           {/* Mobile/Tablet Navigation Menu */}

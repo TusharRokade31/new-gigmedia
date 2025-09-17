@@ -50,7 +50,7 @@ const PageLoader = ({ isLoading, onComplete }) => {
           <div className={`${styles.logo} ${
             animationStage === 'moving' || animationStage === 'curtains' ? styles.logoMoveToTop : ''
           }`}>
-            <Image src={logo}  width={100} height={100} alt="Logo" />
+            <Image src={logo}  width={190} height={190} alt="Logo" />
           </div>
         </div>
       )}

@@ -1,60 +1,64 @@
-'use client'
+// components/CustomCursor.jsx
+"use client"
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
-import { useEffect } from 'react'
+const CustomCursor = () => {
+  const cursorRef = useRef(null);
+  const xToRef = useRef(null);
+  const yToRef = useRef(null);
 
-const useCustomCursor = () => {
   useEffect(() => {
-    const cursor = document.getElementById('custom-cursor')
-    if (!cursor) return
+    if (!cursorRef.current) return;
 
-    let mouseX = 0
-    let mouseY = 0
-    let cursorX = 0
-    let cursorY = 0
+    // Set initial position (centered)
+    gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
 
-    const updateCursor = () => {
-      // Smooth cursor movement
-      cursorX += (mouseX - cursorX) * 0.1
-      cursorY += (mouseY - cursorY) * 0.1
-      
-      cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`
-      requestAnimationFrame(updateCursor)
-    }
+    // Create quickTo animations
+    xToRef.current = gsap.quickTo(cursorRef.current, "x", {
+      duration: 0.6,
+      ease: "power3"
+    });
+    yToRef.current = gsap.quickTo(cursorRef.current, "y", {
+      duration: 0.6,
+      ease: "power3"
+    });
 
     const handleMouseMove = (e) => {
-      mouseX = e.clientX
-      mouseY = e.clientY
-    }
+      if (xToRef.current && yToRef.current) {
+        xToRef.current(e.clientX);
+        yToRef.current(e.clientY);
+      }
+    };
 
-    const handleMouseEnter = () => {
-      cursor.classList.add('cursor-hover')
-    }
-
-    const handleMouseLeave = () => {
-      cursor.classList.remove('cursor-hover')
-    }
-
-    // Add event listeners
-    document.addEventListener('mousemove', handleMouseMove)
-    
-    // Add hover effects to interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .nav-item, [role="button"]')
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter)
-      el.addEventListener('mouseleave', handleMouseLeave)
-    })
-
-    updateCursor()
+    // Add event listener
+    window.addEventListener("mousemove", handleMouseMove);
 
     // Cleanup
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      interactiveElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter)
-        el.removeEventListener('mouseleave', handleMouseLeave)
-      })
-    }
-  }, [])
-}
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
-export default useCustomCursor
+  return (
+    <div
+      ref={cursorRef}
+      className="hidden md:block custom-cursor bg-transparent border border-white"
+      style={{
+        width: '40px',
+        height: '40px',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        pointerEvents: 'none',
+        zIndex: 9999,
+        // Add your custom styling here
+        
+        borderRadius: '50%',
+        mixBlendMode: 'difference', // Optional: creates a cool effect
+      }}
+    />
+  );
+};
+
+export default CustomCursor;

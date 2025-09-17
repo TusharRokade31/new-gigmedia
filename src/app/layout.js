@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Navbar";
 import { LoadingProvider } from "@/context/LoadingContext";
 import NavigationHandler from "@/components/NavigationHandler";
+import CustomCursor from "@/hooks/useCustomCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-black antialiased`}
       >
+         <CustomCursor />
         <LoadingProvider>
           <NavigationHandler>
          <Header />

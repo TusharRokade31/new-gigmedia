@@ -40,7 +40,7 @@ const MagneticSection = () => {
         style={{ x: springX, y: springY }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="group relative hover:z-10 w-96 h-96 rounded-full border border-gray-600 flex items-center justify-center cursor-pointer transition-colors duration-300 hover:border-white hover:bg-white/90"
+        className="group relative hover:z-10 w-80 h-80 rounded-full border border-gray-600 flex items-center justify-center cursor-pointer transition-colors duration-300 hover:border-white hover:bg-white/90"
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.25 }}
       >

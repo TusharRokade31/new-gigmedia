@@ -4,6 +4,7 @@ import Header from "@/components/Navbar";
 import { LoadingProvider } from "@/context/LoadingContext";
 import NavigationHandler from "@/components/NavigationHandler";
 import CustomCursor from "@/hooks/useCustomCursor";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
           <NavigationHandler>
          <Header />
         {children}
+        <Footer/>
         </NavigationHandler>
          </LoadingProvider>
       </body>

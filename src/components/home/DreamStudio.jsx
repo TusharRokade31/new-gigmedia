@@ -196,7 +196,7 @@ const DreamStudio = () => {
           <div className="flex justify-center">
             <div
               ref={whiteBoxRef}
-              className="bg-white w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl text-center flex flex-col justify-center"
+              className="bg-white w-full h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl text-center flex flex-col justify-center"
             >
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-2 sm:mb-4">
                 25

@@ -5,6 +5,8 @@ import { LoadingProvider } from "@/context/LoadingContext";
 import NavigationHandler from "@/components/NavigationHandler";
 import CustomCursor from "@/hooks/useCustomCursor";
 import Footer from "@/components/Footer";
+import { Suspense } from "react";
+import SmoothScroll from "@/hooks/useSmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,18 +24,22 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-black antialiased`}
       >
+         <SmoothScroll />
          <CustomCursor />
         <LoadingProvider>
+           <Suspense fallback={null /* or a tiny loader */}>
           <NavigationHandler>
          <Header />
         {children}
         <Footer/>
         </NavigationHandler>
+        </Suspense>
          </LoadingProvider>
       </body>
     </html>
